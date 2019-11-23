@@ -24,3 +24,19 @@ Make a program to run [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Ga
 ```
 $ npm run
 ```
+
+### Check code formatting
+```
+$ npm run format
+```
+
+### Fix code formatting
+```
+$ npm run format:fix
+```
+
+### Check linitng
+```
+$ npm run lint
+```
+

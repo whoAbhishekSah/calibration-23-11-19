@@ -4,8 +4,25 @@
   "description": "Game Of Life",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "./node_modules/.bin/eslint .",
+    "format": "./node_modules/prettier/bin-prettier.js  --check '**/*.js'",
+    "format:fix": "./node_modules/prettier/bin-prettier.js  --check '**/*.js' --write"
   },
   "author": "Abhishek Sah",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.7.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.1.0",
+    "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run format"
+    }
+  }
 }
