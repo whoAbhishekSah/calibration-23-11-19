@@ -35,8 +35,8 @@ $ npm run format
 $ npm run format:fix
 ```
 
-### Check linitng
+### Check linting
 ```
 $ npm run lint
 ```
-
+Linting rules for this project are followed as per [these guidelines](https://github.com/airbnb/javascript)
