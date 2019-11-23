@@ -1,0 +1,11 @@
+{
+  "name": "calibration-23-11-19",
+  "version": "1.0.0",
+  "description": "Game Of Life",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Abhishek Sah",
+  "license": "ISC"
+}
