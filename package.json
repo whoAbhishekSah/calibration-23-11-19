@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "test": "jest --color --coverage --verbose",
     "lint": "./node_modules/.bin/eslint .",
     "format": "./node_modules/prettier/bin-prettier.js  --check '**/*.js'",
     "format:fix": "./node_modules/prettier/bin-prettier.js  --check '**/*.js' --write"
@@ -16,13 +17,15 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.4",
     "eslint-plugin-prettier": "^3.1.1",
     "husky": "^3.1.0",
+    "jest": "^24.9.0",
     "prettier": "^1.19.1"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run format"
+      "pre-commit": "npm run lint && npm run format && npm run test"
     }
   }
 }

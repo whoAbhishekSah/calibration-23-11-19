@@ -25,6 +25,11 @@ Make a program to run [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Ga
 $ npm run
 ```
 
+### Run tests
+```
+$ npm run test
+```
+
 ### Check code formatting
 ```
 $ npm run format
