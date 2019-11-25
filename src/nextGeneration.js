@@ -1,3 +1,9 @@
+const expandGrid = require("../src/expandGrid");
+const removeDeadBoundryFromTop = require("../src/shrinkGridFromTop");
+const removeDeadBoundryFromBottom = require("../src/shrinkGridFromBottom");
+const removeDeadBoundryFromLeft = require("../src/shrinkGridFromLeft");
+const removeDeadBoundryFromRight = require("../src/shrinkGridFromRight");
+
 function isValidCell(x, y, row, column) {
   return x >= 0 && x < row && y >= 0 && y < column;
 }
@@ -41,27 +47,37 @@ function deepCopyGrid(grid) {
   }
   return copyOfGrid;
 }
+
+function removeDeadBoundry(grid) {
+  removeDeadBoundryFromTop(grid);
+  removeDeadBoundryFromBottom(grid);
+  removeDeadBoundryFromLeft(grid);
+  removeDeadBoundryFromRight(grid);
+  return grid;
+}
+
 function nextGeneration(currentGrid) {
-  const nextGrid = deepCopyGrid(currentGrid);
-  const row = nextGrid.length;
-  const column = nextGrid[0].length;
+  const currentExpandedGrid = expandGrid(currentGrid);
+  const nextExpandedGrid = deepCopyGrid(currentExpandedGrid);
+  const row = nextExpandedGrid.length;
+  const column = nextExpandedGrid[0].length;
   for (let i = 0; i < row; i += 1) {
     for (let j = 0; j < column; j += 1) {
       if (
-        currentGrid[i][j] === "▦" &&
-        (aliveNeighboursCount(currentGrid, i, j) < 2 ||
-          aliveNeighboursCount(currentGrid, i, j) > 3)
+        currentExpandedGrid[i][j] === "▦" &&
+        (aliveNeighboursCount(currentExpandedGrid, i, j) < 2 ||
+          aliveNeighboursCount(currentExpandedGrid, i, j) > 3)
       ) {
-        nextGrid[i][j] = "▫";
+        nextExpandedGrid[i][j] = "▫";
       } else if (
-        currentGrid[i][j] === "▫" &&
-        aliveNeighboursCount(currentGrid, i, j) === 3
+        currentExpandedGrid[i][j] === "▫" &&
+        aliveNeighboursCount(currentExpandedGrid, i, j) === 3
       ) {
-        nextGrid[i][j] = "▦";
+        nextExpandedGrid[i][j] = "▦";
       }
     }
   }
-  return nextGrid;
+  return removeDeadBoundry(nextExpandedGrid);
 }
 
 module.exports = nextGeneration;
