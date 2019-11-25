@@ -39,7 +39,6 @@ function deepCopyGrid(grid) {
       copyOfGrid[i].push(grid[i][j]);
     }
   }
-  console.log(copyOfGrid);
   return copyOfGrid;
 }
 function nextGeneration(currentGrid) {
@@ -54,6 +53,11 @@ function nextGeneration(currentGrid) {
           aliveNeighboursCount(currentGrid, i, j) > 3)
       ) {
         nextGrid[i][j] = "▫";
+      } else if (
+        currentGrid[i][j] === "▫" &&
+        aliveNeighboursCount(currentGrid, i, j) === 3
+      ) {
+        nextGrid[i][j] = "▦";
       }
     }
   }

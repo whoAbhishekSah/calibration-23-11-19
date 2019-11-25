@@ -25,3 +25,16 @@ test("should kill alive cell by overpopulation", () => {
   const actualNextGrid = nextGeneration(currentGrid);
   expect(actualNextGrid).toMatchObject(expectedNextGrid);
 });
+
+test("should make dead cell alive by reproduction", () => {
+  const currentGrid = [
+    ["▫", "▦"],
+    ["▦", "▦"]
+  ];
+  const expectedNextGrid = [
+    ["▦", "▦"],
+    ["▦", "▦"]
+  ];
+  const actualNextGrid = nextGeneration(currentGrid);
+  expect(actualNextGrid).toMatchObject(expectedNextGrid);
+});
