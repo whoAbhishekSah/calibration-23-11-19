@@ -29,15 +29,29 @@ function aliveNeighboursCount(grid, x, y) {
   return result;
 }
 
+function deepCopyGrid(grid) {
+  const row = grid.length;
+  const column = grid[0].length;
+  const copyOfGrid = [];
+  for (let i = 0; i < row; i += 1) {
+    copyOfGrid.push([]);
+    for (let j = 0; j < column; j += 1) {
+      copyOfGrid[i].push(grid[i][j]);
+    }
+  }
+  console.log(copyOfGrid);
+  return copyOfGrid;
+}
 function nextGeneration(currentGrid) {
-  const nextGrid = Array.from(currentGrid);
+  const nextGrid = deepCopyGrid(currentGrid);
   const row = nextGrid.length;
   const column = nextGrid[0].length;
   for (let i = 0; i < row; i += 1) {
     for (let j = 0; j < column; j += 1) {
       if (
         currentGrid[i][j] === "▦" &&
-        aliveNeighboursCount(currentGrid, i, j) < 2
+        (aliveNeighboursCount(currentGrid, i, j) < 2 ||
+          aliveNeighboursCount(currentGrid, i, j) > 3)
       ) {
         nextGrid[i][j] = "▫";
       }
