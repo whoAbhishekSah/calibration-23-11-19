@@ -21,8 +21,17 @@ Make a program to run [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Ga
 - NPM 6.9.0
 
 ### Run the Game
+
+Step 1: Input initial configuration:
+
+- Put you initial configuration in `input.txt`
+- Grid is a [mxn] array where,
+    - [▦] denotes an alive cell
+    - [▫] denotes a dead cell
+
+Step 2: Run the game
 ```
-$ npm run
+npm run start
 ```
 
 ### Run tests
