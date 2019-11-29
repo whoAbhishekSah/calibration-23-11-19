@@ -56,28 +56,28 @@ function removeDeadBoundry(grid) {
   return grid;
 }
 
+const checkUnderAndOverPopulation = (grid, rowIndex, columnIndex) =>
+  grid[rowIndex][columnIndex] === "▦" &&
+  (aliveNeighboursCount(grid, rowIndex, columnIndex) < 2 ||
+    aliveNeighboursCount(grid, rowIndex, columnIndex) > 3);
+
+const checkReproduction = (grid, rowIndex, columnIndex) =>
+  grid[rowIndex][columnIndex] === "▫" &&
+  aliveNeighboursCount(grid, rowIndex, columnIndex) === 3;
+
 function nextGeneration(currentGrid) {
-  const currentExpandedGrid = expandGrid(currentGrid);
-  const nextExpandedGrid = deepCopyGrid(currentExpandedGrid);
-  const row = nextExpandedGrid.length;
-  const column = nextExpandedGrid[0].length;
-  for (let i = 0; i < row; i += 1) {
-    for (let j = 0; j < column; j += 1) {
-      if (
-        currentExpandedGrid[i][j] === "▦" &&
-        (aliveNeighboursCount(currentExpandedGrid, i, j) < 2 ||
-          aliveNeighboursCount(currentExpandedGrid, i, j) > 3)
-      ) {
-        nextExpandedGrid[i][j] = "▫";
-      } else if (
-        currentExpandedGrid[i][j] === "▫" &&
-        aliveNeighboursCount(currentExpandedGrid, i, j) === 3
-      ) {
-        nextExpandedGrid[i][j] = "▦";
-      }
-    }
-  }
-  return removeDeadBoundry(nextExpandedGrid);
+  const grid = expandGrid(currentGrid);
+  const nextExpandedGrid = makeCopy(grid);
+  return removeDeadBoundry(
+    nextExpandedGrid.map((row, rowIndex) => {
+      return row.map((cell, columnIndex) => {
+        if (checkUnderAndOverPopulation(grid, rowIndex, columnIndex))
+          return "▫";
+        if (checkReproduction(grid, rowIndex, columnIndex)) return "▦";
+        return cell;
+      });
+    })
+  );
 }
 
 module.exports = nextGeneration;
