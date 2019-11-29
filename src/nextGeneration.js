@@ -35,18 +35,11 @@ function aliveNeighboursCount(grid, x, y) {
   return result;
 }
 
-function deepCopyGrid(grid) {
-  const row = grid.length;
-  const column = grid[0].length;
-  const copyOfGrid = [];
-  for (let i = 0; i < row; i += 1) {
-    copyOfGrid.push([]);
-    for (let j = 0; j < column; j += 1) {
-      copyOfGrid[i].push(grid[i][j]);
-    }
-  }
-  return copyOfGrid;
-}
+const deepCopyGrid = grid =>
+  grid.reduce((acc, row, rowIndex) => {
+    acc[rowIndex] = [...row];
+    return acc;
+  }, []);
 
 function removeDeadBoundry(grid) {
   removeDeadBoundryFromTop(grid);
@@ -67,7 +60,7 @@ const checkReproduction = (grid, rowIndex, columnIndex) =>
 
 function nextGeneration(currentGrid) {
   const grid = expandGrid(currentGrid);
-  const nextExpandedGrid = makeCopy(grid);
+  const nextExpandedGrid = deepCopyGrid(grid);
   return removeDeadBoundry(
     nextExpandedGrid.map((row, rowIndex) => {
       return row.map((cell, columnIndex) => {
