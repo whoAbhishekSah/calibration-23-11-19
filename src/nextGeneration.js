@@ -4,13 +4,10 @@ const removeDeadBoundryFromBottom = require("../src/shrinkGridFromBottom");
 const removeDeadBoundryFromLeft = require("../src/shrinkGridFromLeft");
 const removeDeadBoundryFromRight = require("../src/shrinkGridFromRight");
 
-function isValidCell(x, y, row, column) {
-  return x >= 0 && x < row && y >= 0 && y < column;
-}
+const isValidCell = (x, y, row, column) =>
+  x >= 0 && x < row && y >= 0 && y < column;
 
-function isAliveCell(grid, i, j) {
-  return grid[i][j] === "▦";
-}
+const isAliveCell = (grid, i, j) => grid[i][j] === "▦";
 
 function aliveNeighboursCount(grid, x, y) {
   const row = grid.length;
